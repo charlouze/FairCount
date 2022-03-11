@@ -12,7 +12,7 @@ export const environment = {
     authDomain: 'faircount.firebaseapp.com',
     messagingSenderId: '981038919493',
   },
-  production: false
+  production: false,
 };
 
 /*
