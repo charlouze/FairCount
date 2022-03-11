@@ -119,9 +119,21 @@
             "firebaseProject": "faircount",
             "firebaseHostingSite": "faircount"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "faircount"
+  "defaultProject": "faircount",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
