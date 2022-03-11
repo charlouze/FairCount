@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "faircount"
+  },
+  "targets": {
+    "faircount": {
+      "hosting": {
+        "faircount": [
+          "faircount"
+        ]
+      }
+    }
   }
 }
