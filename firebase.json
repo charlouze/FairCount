@@ -5,20 +5,6 @@
   },
   "hosting": [
     {
-      "public": "dist/faircount",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    },
-    {
       "target": "faircount",
       "public": "dist/faircount",
       "ignore": [
