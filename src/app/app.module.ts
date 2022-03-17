@@ -18,6 +18,9 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { MatLuxonDateModule } from '@angular/material-luxon-adapter';
+import { ConfirmDialogModule } from './shared/confirm-dialog';
+import { AppUpdateService } from './shared/app-update.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 let resolvePersistenceEnabled: (enabled: boolean) => void;
 
@@ -34,6 +37,8 @@ export const persistenceEnabled = new Promise<boolean>(resolve => {
     AppRoutingModule,
     BrowserAnimationsModule,
     MatLuxonDateModule,
+    ConfirmDialogModule,
+    MatSnackBarModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -68,7 +73,8 @@ export const persistenceEnabled = new Promise<boolean>(resolve => {
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor() {
+  constructor(appUpdate: AppUpdateService) {
     registerLocaleData(localeFr);
+    appUpdate.init();
   }
 }
