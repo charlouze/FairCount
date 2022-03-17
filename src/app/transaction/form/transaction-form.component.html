@@ -1,0 +1,56 @@
+<app-page-layout>
+  <app-go-back appPageLayoutToolbar></app-go-back>
+  <h1 appPageLayoutToolbar>
+    Ajouter une transaction
+  </h1>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field>
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="dateCtrl.hasError('required')">Le nom est obligatoire</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Label</mat-label>
+      <input type="text" matInput formControlName="label"/>
+      <mat-error *ngIf="labelCtrl.hasError('required')">Le label est obligatoire</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Montant</mat-label>
+      <input type="number" matInput formControlName="amount"/>
+      <mat-error *ngIf="amountCtrl.hasError('required')">Le montant est obligatoire</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Payé par</mat-label>
+      <mat-select formControlName="creditor">
+        <mat-option *ngFor="let participant of (participants$ | async); let index = index" [value]="index">
+          {{participant.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="creditorCtrl.hasError('required')">Genre personne n'a dépensé d'argent ?!</mat-error>
+    </mat-form-field>
+    <div class="debtors" formArrayName="debtors">
+      <h3>Au profit de :</h3>
+      <div class="debtor" *ngFor="let participant of (participants$ | async); let index = index"
+           [formGroupName]="index">
+        <div class="debtor-fields">
+          <mat-checkbox class="debtor-selected" formControlName="selected">{{participant.name}}</mat-checkbox>
+          <mat-form-field class="debtor-weight">
+            <mat-label>Poid</mat-label>
+            <input type="number" matInput formControlName="weight"/>
+          </mat-form-field>
+        </div>
+        <div class="debtor-errors">
+          <mat-error *ngIf="hasDebtorError(index,'weight', 'required')">
+            Le poids du profilteur est obligatoire
+          </mat-error>
+          <mat-error *ngIf="hasDebtorError(index,'weight', 'min')">
+            Le poids du profiteur doit être au minimum de 1
+          </mat-error>
+        </div>
+      </div>
+    </div>
+    <button type="submit" mat-flat-button color="primary" [disabled]="!canSubmit()">Créer</button>
+  </form>
+</app-page-layout>

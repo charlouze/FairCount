@@ -1,0 +1,40 @@
+<app-page-layout>
+  <button appPageLayoutToolbar mat-icon-button [mat-menu-trigger-for]="accountMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #accountMenu="matMenu">
+    <a mat-menu-item [routerLink]="['./settings']">
+      <mat-icon>account_balance</mat-icon>
+      Paramètre du compte
+    </a>
+    <a mat-menu-item [routerLink]="['./members']">
+      <mat-icon>badge</mat-icon>
+      Gestion des accès
+    </a>
+    <a mat-menu-item [routerLink]="['/home']">
+      <mat-icon>arrow_back</mat-icon>
+      Retour à mes comptes
+    </a>
+  </mat-menu>
+  <span appPageLayoutToolbar>{{(account$ | async)?.name}}</span>
+  <button mat-fab title="Ajouter..." [routerLink]="['./transaction', 'add']">
+    <mat-icon>add</mat-icon>
+  </button>
+  <div class="content">
+    <mat-tab-group>
+      <mat-tab label="Transactions">
+        <div class="tab-content">
+          <app-account-home-transaction-item class="item" *ngFor="let transaction of transactions$ | async"
+                                             [transaction]="transaction" [account]="account$ | async"
+                                             #item (click)="item.toggleDisplay()">
+          </app-account-home-transaction-item>
+        </div>
+      </mat-tab>
+      <mat-tab label="Equilibre">
+        <div class="tab-content">
+          <app-account-home-balance [account]="account$ | async" [transactions]="transactions$ | async"></app-account-home-balance>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</app-page-layout>

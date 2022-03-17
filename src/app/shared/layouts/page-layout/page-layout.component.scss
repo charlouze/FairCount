@@ -1,0 +1,21 @@
+:host {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  section {
+    &#content {
+      flex-grow: 1;
+      box-sizing: border-box;
+      padding: 10px;
+      position: relative;
+
+      .fab {
+        z-index: 100;
+        position: absolute;
+        top: -28px;
+        right: 10px;
+      }
+    }
+  }
+}

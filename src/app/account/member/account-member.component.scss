@@ -1,0 +1,18 @@
+@import "src/app/shared/form/form.component";
+
+:host {
+  @include form-style;
+
+  .member {
+    display: flex;
+    gap: 5px;
+
+    .member-email {
+      flex: 1 1 auto;
+    }
+
+    .member-remove-btn {
+      flex: 0 0 fit-content;
+    }
+  }
+}

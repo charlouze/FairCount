@@ -1,0 +1,38 @@
+:host {
+  form {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      margin: 5px 0;
+    }
+
+    .debtor {
+      .debtor-fields {
+        display: flex;
+        gap: 5px;
+        align-items: flex-end;
+
+        .debtor-selected {
+          flex: 1 1 auto;
+          margin-bottom: 1.25em;
+        }
+
+        .debtor-weight {
+          flex: 0 0 auto;
+          width: 50px;
+        }
+      }
+
+      .debtor-errors {
+        margin-top: -1.25em;
+        min-height: 1.25em;
+
+        mat-error {
+          font-size: 75%;
+          height: 1.25em;
+        }
+      }
+    }
+  }
+}

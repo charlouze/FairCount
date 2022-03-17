@@ -1,0 +1,22 @@
+:host {
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .tab-content {
+      display: flex;
+      flex-direction: column;
+
+      .item {
+        border-bottom: lightgrey 1px solid;
+        padding: 5px 0;
+        cursor: pointer;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}

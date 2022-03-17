@@ -36,7 +36,9 @@
           }
         ],
         "comma-dangle": ["error", "always-multiline"],
-        "semi": ["error", "always"]
+        "semi": ["error", "always"],
+        "array-bracket-newline": ["error", "consistent"],
+        "array-element-newline": ["error", "consistent"]
       }
     },
     {

@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .label:first-letter {
+    text-transform: uppercase;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    font-size: larger;
+    margin-bottom: 5px;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: inside;
+  }
+}

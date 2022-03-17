@@ -1,0 +1,11 @@
+<div>
+  <span class="label">{{transaction?.label}}</span>
+  <span class="amount">{{amount | currency}}</span>
+</div>
+<span>Payé par {{creditor}} le {{date}}</span>
+<ng-container *ngIf="fullDisplay">
+  <span>Au profit de :</span>
+  <ul>
+    <li *ngFor="let debtor of debtors">{{debtor.participant?.name}} à hauteur de {{debtor.amount | currency}}</li>
+  </ul>
+</ng-container>

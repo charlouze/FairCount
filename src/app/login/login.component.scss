@@ -1,0 +1,5 @@
+@import "src/app/shared/form/form.component";
+
+:host {
+  @include form-style;
+}

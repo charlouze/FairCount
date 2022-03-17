@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+  <ng-content select="[appPageLayoutToolbar]"></ng-content>
+</mat-toolbar>
+<section id="content">
+  <span class="fab">
+    <ng-content select="[mat-fab]"></ng-content>
+  </span>
+  <ng-content></ng-content>
+</section>

@@ -1,0 +1,46 @@
+<app-page-layout>
+  <app-go-back appPageLayoutToolbar></app-go-back>
+  <h1 appPageLayoutToolbar *ngIf="(account$ | async) === null">
+    Création de compte
+  </h1>
+  <h1 appPageLayoutToolbar *ngIf="account$ | async">
+    {{(account$ | async)?.name}} - Paramètres
+  </h1>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field>
+      <mat-label>Nom du compte</mat-label>
+      <input type="text" matInput formControlName="name"/>
+      <mat-error *ngIf="nameCtrl.hasError('required')">Le nom du compte est obligatoire</mat-error>
+    </mat-form-field>
+    <div class="participant" *ngFor="let participantGrp of participantGroups; let index = index"
+         [formGroup]="participantGrp">
+      <div class="participant-fields">
+        <mat-form-field class="participant-name">
+          <mat-label>Nom du participant</mat-label>
+          <input type="text" matInput formControlName="name"/>
+        </mat-form-field>
+        <mat-form-field class="participant-weight">
+          <mat-label>Poids</mat-label>
+          <input type="number" matInput formControlName="weight"/>
+        </mat-form-field>
+        <button  class="participant-remove-btn" type="button" mat-icon-button *ngIf="canRemoveParticipant(index) | async"
+                (click)="removeParticipant(index)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <div class="participant-errors">
+        <mat-error *ngIf="hasParticipantError(participantGrp,'name', 'required')">
+          Le nom du participant est obligatoire
+        </mat-error>
+        <mat-error *ngIf="hasParticipantError(participantGrp,'weight', 'required')">
+          Le poids du participant est obligatoire
+        </mat-error>
+        <mat-error *ngIf="hasParticipantError(participantGrp,'weight', 'min')">
+          Le poids du participant doit être au minimum de 1
+        </mat-error>
+      </div>
+    </div>
+    <button type="button" mat-flat-button (click)="addParticipant()">Ajouter un participant</button>
+    <button type="submit" mat-flat-button color="primary" [disabled]="!canSubmit()">Créer</button>
+  </form>
+</app-page-layout>

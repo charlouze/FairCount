@@ -1,0 +1,20 @@
+<app-page-layout>
+  <span appPageLayoutToolbar>Connecte-toi !</span>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field hideRequiredMarker>
+      <mat-label>E-mail</mat-label>
+      <input matInput placeholder="E-mail" type="text" formControlName="email"/>
+      <mat-error *ngIf="emailCtrl.hasError('required')">L'e-mail est obligatoire</mat-error>
+      <mat-error *ngIf="emailCtrl.hasError('email')">L'e-mail n'a pas le bon format</mat-error>
+    </mat-form-field>
+    <mat-form-field hideRequiredMarker>
+      <mat-label>Mot de passe</mat-label>
+      <input matInput placeholder="Mot de passe" type="password" formControlName="password"/>
+      <mat-error *ngIf="passwordCtrl.hasError('required')">Le mot de passe est obligatoire</mat-error>
+      <mat-error *ngIf="passwordCtrl.hasError('minlength')">
+        Le mot de passe doit faire 6 caractère au minimum
+      </mat-error>
+    </mat-form-field>
+    <button type="submit" mat-flat-button color="primary" [disabled]="!canSubmit()">Se connecter</button>
+  </form>
+</app-page-layout>

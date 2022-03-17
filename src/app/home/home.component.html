@@ -1,0 +1,16 @@
+<app-page-layout>
+  <span appPageLayoutToolbar>Vos comptes</span>
+  <a mat-fab [routerLink]="['/account', 'add']" title="Ajouter un compte">
+    <mat-icon>add</mat-icon>
+  </a>
+  <div class="list">
+    <mat-card *ngFor="let account of accounts$ | async">
+      <mat-card-header>
+        <mat-card-title>{{account.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-actions>
+        <a mat-button [routerLink]="['/account', account.id]" color="primary">Voir</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</app-page-layout>

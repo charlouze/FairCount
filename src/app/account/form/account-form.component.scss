@@ -1,0 +1,35 @@
+@import "src/app/shared/form/form.component";
+
+:host {
+  @include form-style;
+
+  .participant {
+    .participant-fields {
+      display: flex;
+      gap: 5px;
+
+      .participant-name {
+        flex: 1 1 auto;
+      }
+
+      .participant-weight {
+        flex: 0 0 auto;
+        width: 50px;
+      }
+
+      .participant-remove-btn {
+        flex: 0 0 fit-content;
+      }
+    }
+
+    .participant-errors {
+      margin-top: -1.25em;
+      min-height: 1.25em;
+
+      mat-error {
+        font-size: 75%;
+        height: 1.25em;
+      }
+    }
+  }
+}

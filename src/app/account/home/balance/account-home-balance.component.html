@@ -1,0 +1,13 @@
+<h3>Balances</h3>
+<ul>
+  <li *ngFor="let balance of balances" [ngClass]="computeBalanceClass(balance)">
+    {{balance.participant.name}} : {{computeBalanceValue(balance) | currency}}
+  </li>
+</ul>
+<h3>Remboursements</h3>
+<ul>
+  <li *ngFor="let repayment of repayments">
+    {{repayment.debtor.name}} doit {{repayment.amount | currency}} à {{repayment.creditor.name}}
+  </li>
+</ul>
+

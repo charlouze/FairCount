@@ -1,0 +1,19 @@
+<app-page-layout>
+  <app-go-back appPageLayoutToolbar></app-go-back>
+  <span appPageLayoutToolbar>{{(account$ | async)?.name}} - Accès</span>
+  <form (ngSubmit)="submit()">
+    <div class="member" *ngFor="let memberCtrl of memberCtrls; let index = index">
+      <mat-form-field class="member-email">
+        <mat-label>Email du membre</mat-label>
+        <input type="email" matInput [formControl]="memberCtrl"/>
+        <mat-error *ngIf="memberCtrl.hasError('required')">L'email est obligatoire</mat-error>
+        <mat-error *ngIf="memberCtrl.hasError('email')">L'email est malformaté</mat-error>
+      </mat-form-field>
+      <button class="member-remove-btn" type="button" mat-icon-button (click)="removeMember(index)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <button type="button" mat-flat-button (click)="addMember()">Ajouter un membre</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid || submitted">Enregistrer</button>
+  </form>
+</app-page-layout>
