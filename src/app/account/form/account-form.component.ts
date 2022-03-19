@@ -93,7 +93,7 @@ export class AccountFormComponent extends FormComponent<Account> implements OnIn
       if (account) {
         return this.accountService.update(account, this.form.value);
       } else {
-        return this.authService.user.pipe(switchMap(user => this.accountService.create(user, this.form.value)));
+        return this.authService.user.pipe(first(), switchMap(user => this.accountService.create(user, this.form.value)));
       }
     }));
   }
