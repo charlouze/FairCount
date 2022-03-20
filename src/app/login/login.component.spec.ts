@@ -16,6 +16,8 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import createSpyObj = jasmine.createSpyObj;
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -41,6 +43,8 @@ describe('LoginComponent', () => {
         MatButtonModule,
         MatSnackBarModule,
         RouterTestingModule,
+        MatDialogModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
       ],
     }).overrideComponent(LoginComponent, {
       set: { changeDetection: ChangeDetectionStrategy.Default },

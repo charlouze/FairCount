@@ -16,6 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ApplicationStateService } from '../../shared/application-state.service';
 import { Account } from '../../shared/account';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { MatDialogModule } from '@angular/material/dialog';
 import createSpyObj = jasmine.createSpyObj;
 
 describe('TransactionFormComponent', () => {
@@ -45,6 +47,8 @@ describe('TransactionFormComponent', () => {
         PageLayoutModule,
         MatIconModule,
         NoopAnimationsModule,
+        MatDialogModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
       ],
     }).compileComponents();
   });

@@ -11,6 +11,8 @@ import { ApplicationStateService } from '../../shared/application-state.service'
 import { of } from 'rxjs';
 import { Account } from '../../shared/account';
 import createSpyObj = jasmine.createSpyObj;
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('AccountHomeComponent', () => {
   let component: AccountHomeComponent;
@@ -32,6 +34,8 @@ describe('AccountHomeComponent', () => {
         MatIconModule,
         MatMenuModule,
         MatBottomSheetModule,
+        MatDialogModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
       ],
     })
       .compileComponents();

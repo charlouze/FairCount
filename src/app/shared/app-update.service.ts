@@ -1,6 +1,6 @@
 import { ApplicationRef, Injectable } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { concat, filter, first, interval } from 'rxjs';
+import { BehaviorSubject, concat, filter, first, interval } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog';
@@ -8,6 +8,12 @@ import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AppUpdateService {
+  private shouldReloadSubject = new BehaviorSubject<boolean>(false);
+
+  get shouldReload$() {
+    return this.shouldReloadSubject.asObservable();
+  }
+
   constructor(private appRef: ApplicationRef, private update: SwUpdate, private snackbar: MatSnackBar,
               private dialog: MatDialog) {
   }
@@ -36,10 +42,9 @@ export class AppUpdateService {
   }
 
   private promptReload(msg: string) {
-    this.dialog.open(ConfirmDialogComponent, {
-      data: { msg: msg, action: 'Recharger' },
-      hasBackdrop: false,
-    }).afterClosed().pipe(filter(reload => reload)).subscribe(() => document.location.reload());
+    const afterClosed = this.dialog.open(ConfirmDialogComponent, { data: { msg: msg, action: 'Recharger' } }).afterClosed();
+    afterClosed.pipe(filter(reload => reload)).subscribe(() => document.location.reload());
+    afterClosed.pipe(filter(reload => !reload)).subscribe(() => this.shouldReloadSubject.next(true));
   }
 
   private error(msg: string) {

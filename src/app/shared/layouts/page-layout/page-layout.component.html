@@ -1,4 +1,7 @@
 <mat-toolbar color="primary">
+  <button mat-icon-button *ngIf="update.shouldReload$ | async" (click)="refresh()" color="accent">
+    <mat-icon>refresh</mat-icon>
+  </button>
   <ng-content select="[appPageLayoutToolbar]"></ng-content>
 </mat-toolbar>
 <section id="content">

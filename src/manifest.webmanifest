@@ -1,6 +1,6 @@
 {
-  "name": "faircount",
-  "short_name": "faircount",
+  "name": "FairCount",
+  "short_name": "FairCount",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
