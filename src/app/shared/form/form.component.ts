@@ -1,19 +1,15 @@
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { finalize, first, Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Destroyed } from '../destroyed';
+import { SubFormComponent } from './sub-form.component';
 
-export abstract class FormComponent<T> extends Destroyed {
-  form: FormGroup;
-
+export abstract class FormComponent<T> extends SubFormComponent {
   submitted = false;
 
   protected constructor(fb: FormBuilder, private sb: MatSnackBar) {
-    super();
+    super(fb);
     this.form = this.createForm(fb);
   }
-
-  protected abstract createForm(fb: FormBuilder): FormGroup;
 
   protected abstract doSubmit(): Observable<T>;
 
@@ -22,14 +18,6 @@ export abstract class FormComponent<T> extends Destroyed {
   protected abstract computeSuccessMsg(object: T): null | string | Observable<string>;
 
   protected abstract computeErrorMsg(error: any): string;
-
-  protected getCtrl(path: string) {
-    return this.form.get(path) as FormControl;
-  }
-
-  protected getArray(path: string) {
-    return this.form.get(path) as FormArray;
-  }
 
   canSubmit() {
     return this.form.valid && !this.submitted;
