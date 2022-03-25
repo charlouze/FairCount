@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Transaction } from '../../../shared/transaction';
+import { Transaction, TransactionService } from '../../../shared/transaction';
 import { Account } from '../../../shared/account';
 import { DateTime } from 'luxon';
 import { BalanceUtils } from '../../../shared/balance.utils';
@@ -62,7 +62,16 @@ export class AccountHomeTransactionItemComponent {
     return [];
   }
 
+  constructor(private transactionService: TransactionService) {
+  }
+
   toggleDisplay() {
     this.lightDisplay = !this.lightDisplay;
+  }
+
+  delete() {
+    if(this.account && this.transaction) {
+      this.transactionService.delete(this.account, this.transaction);
+    }
   }
 }

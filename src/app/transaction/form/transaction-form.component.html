@@ -32,10 +32,10 @@
     </mat-form-field>
     <div class="debtors" formArrayName="debtors">
       <h3>Au profit de :</h3>
-      <div class="debtor" *ngFor="let participant of (participants$ | async); let index = index"
-           [formGroupName]="index">
+      <div class="debtor" *ngFor="let debtorCtrl of this.debtorCtrls; let index = index"
+           [formGroup]="debtorCtrl">
         <div class="debtor-fields">
-          <mat-checkbox class="debtor-selected" formControlName="selected">{{participant.name}}</mat-checkbox>
+          <mat-checkbox class="debtor-selected" formControlName="selected">{{getParticipantName(index) | async}}</mat-checkbox>
           <mat-form-field class="debtor-weight">
             <mat-label>Poids</mat-label>
             <input type="number" matInput formControlName="weight"/>

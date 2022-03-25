@@ -8,4 +8,14 @@
   <ul>
     <li *ngFor="let debtor of debtors">{{debtor.participant?.name}} à hauteur de {{debtor.amount | currency}}</li>
   </ul>
+  <div class="transaction-actions">
+    <button mat-stroked-button [routerLink]="['transaction', transaction?.id]">
+      <mat-icon>edit</mat-icon>
+      Modifier
+    </button>
+    <button mat-stroked-button color="warn" (click)="delete()">
+      <mat-icon>delete</mat-icon>
+      Supprimer
+    </button>
+  </div>
 </ng-container>

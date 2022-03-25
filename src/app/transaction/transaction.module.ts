@@ -12,11 +12,23 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { GoBackModule } from '../shared/go-back/go-back.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TransactionExistsGuard } from '../shared/transaction';
 
 const routes: Route[] = [
   {
     path: 'add',
     component: TransactionFormComponent,
+    data: {
+      edit: false,
+    },
+  },
+  {
+    path: ':transactionId',
+    component: TransactionFormComponent,
+    canActivate: [TransactionExistsGuard],
+    data: {
+      edit: true,
+    },
   },
 ];
 
@@ -24,20 +36,20 @@ const routes: Route[] = [
   declarations: [
     TransactionFormComponent,
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        PageLayoutModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatDatepickerModule,
-        MatSelectModule,
-        GoBackModule,
-        MatCheckboxModule,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    PageLayoutModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    GoBackModule,
+    MatCheckboxModule,
+  ],
 })
 export class TransactionModule {
 }
